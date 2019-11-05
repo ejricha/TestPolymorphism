@@ -1,0 +1,97 @@
+// Animal.cpp
+
+#include "Animal.h"
+
+#include <sstream>
+
+namespace toolbox
+{
+
+// Default constructor
+Animal::Animal(const std::string& name) : mName { name }
+{
+}
+
+// Default constructor
+Cat::Cat(const std::string& name) : Animal(name), mNumWhiskers(4)
+{
+	SetNumLimbs(4);
+}
+
+// Override the Speak function
+std::string Cat::Speak() const
+{
+	return "Meow";
+}
+
+// Set the number of whiskers
+void Cat::SetNumWhiskers(size_t numWhiskers)
+{
+	mNumWhiskers = numWhiskers;
+}
+	
+// Print information about the Cat
+std::string Cat::Info() const
+{
+	std::ostringstream os;
+	os << "The Cat named " << GetName()
+		<< " has " << GetNumLimbs() << " legs"
+		<< " and " << mNumWhiskers << " whiskers"
+		<< " and says \"" << Speak() << "\"";
+	return os.str();
+}
+
+// Default constructor
+Fish::Fish(const std::string& name) : Animal(name), mHasScales(true)
+{
+	SetNumLimbs(4);
+}
+
+// Override the Speak function
+std::string Fish::Speak() const
+{
+	return "Glub";
+}
+
+// Set whether it has scales or not
+void Fish::SetHasScales(bool hasScales)
+{
+	mHasScales = hasScales;
+}
+	
+// Print information about the Fish
+std::string Fish::Info() const
+{
+	std::ostringstream os;
+	os << "The Fish named " << GetName()
+		<< " has " << GetNumLimbs() << " legs"
+		<< " and " << (mHasScales ? "scales" : "smooth skin")
+		<< " and says \"" << Speak() << "\"";
+	return os.str();
+}
+
+// Default constructor
+Octopus::Octopus(const std::string& name) : Fish(name)
+{
+	SetNumLimbs(8);
+	SetHasScales(false);
+}
+
+// Override the Speak function
+std::string Octopus::Speak() const
+{
+	return "Octopus Sounds!";
+}
+	
+// Print information about the Octopus
+std::string Octopus::Info() const
+{
+	std::ostringstream os;
+	os << "The Octopus named " << GetName()
+		<< " has " << GetNumLimbs() << " legs"
+		<< " and a big brain"
+		<< " and says \"" << Speak() << "\"";
+	return os.str();
+}
+
+} // namespace toolbox
