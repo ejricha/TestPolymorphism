@@ -16,8 +16,8 @@ Animal::Animal(const std::string& name) : mName { name }
 Cat::Cat(const std::string& name, const std::string& color, bool hasStripes) : Animal(name), mNumWhiskers(4)
 {
 	SetSkinColor(color);
-	//(dynamic_cast<CatSkin*>(mSkin.get()))->SetHasStripes(hasStripes);
-	(dynamic_cast<CatSkin*>(mSkin))->SetHasStripes(hasStripes);
+	(dynamic_cast<CatSkin*>(mSkin.get()))->SetHasStripes(hasStripes);
+	//(dynamic_cast<CatSkin*>(mSkin))->SetHasStripes(hasStripes);
 	SetNumLimbs(4);
 }
 
@@ -36,8 +36,8 @@ void Cat::SetNumWhiskers(size_t numWhiskers)
 // Set the skin color
 void Cat::SetSkinColor(const std::string& color)
 {
-	//mSkin = std::make_unique<CatSkin>(color);
-	mSkin = new CatSkin(color);
+	mSkin = std::make_unique<CatSkin>(color);
+	//mSkin = new CatSkin(color);
 }
 
 // Print information about the Cat
@@ -74,8 +74,8 @@ void Fish::SetHasScales(bool hasScales)
 // Set the skin color
 void Fish::SetSkinColor(const std::string& color)
 {
-	//mSkin = std::make_unique<FishSkin>(color);
-	mSkin = new FishSkin(color);
+	mSkin = std::make_unique<FishSkin>(color);
+	//mSkin = new FishSkin(color);
 }
 
 // Print information about the Fish

@@ -16,10 +16,7 @@ public:
 	Animal(const std::string& name);
 
 	// Virtual destructor
-	virtual ~Animal()
-	{
-		delete mSkin;
-	}
+	virtual ~Animal() = default;
 
 	// Pure virtual Speak fuction
 	virtual std::string Speak() const = 0;
@@ -56,8 +53,8 @@ public:
 
 protected:
 	// Detailed information about the AnimalSkin
-	//std::unique_ptr<AnimalSkin> mSkin;
-	AnimalSkin* mSkin;
+	std::unique_ptr<AnimalSkin> mSkin;
+	//AnimalSkin* mSkin;
 
 private:
 	std::string mName;
