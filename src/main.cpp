@@ -31,30 +31,30 @@ int TestAnimals()
 {
 	using namespace toolbox;
 
-	Cat c1("adam");
+	Cat c1("adam", "black", false);
 	PrintAnimal(&c1);
 	PrintAnimal(c1);
 
-	Cat c2("beatrice");
+	Cat c2("beatrice", "brown", true);
 	c2.SetNumWhiskers(53);
 	PrintAnimal(&c2);
 	PrintAnimal(c2);
 
-	Fish f1("cathy");
+	Fish f1("cathy", "red");
 	PrintAnimal(&f1);
 	PrintAnimal(f1);
 
-	Fish f2("doug");
+	Fish f2("doug", "blue");
 	f2.SetHasScales(false);
 	PrintAnimal(&f2);
 	PrintAnimal(f2);
 	
-	Fish f3("eric");
+	Fish f3("eric", "green");
 	f3.SetHasScales(true);
 	PrintAnimal(&f3);
 	PrintAnimal(f3);
 
-	Octopus o1("fred");
+	Octopus o1("fred", "invisible");
 	PrintAnimal(&o1);
 	PrintAnimal(o1);
 

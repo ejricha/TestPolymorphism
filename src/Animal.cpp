@@ -13,8 +13,11 @@ Animal::Animal(const std::string& name) : mName { name }
 }
 
 // Default constructor
-Cat::Cat(const std::string& name) : Animal(name), mNumWhiskers(4)
+Cat::Cat(const std::string& name, const std::string& color, bool hasStripes) : Animal(name), mNumWhiskers(4)
 {
+	SetSkinColor(color);
+	//(dynamic_cast<CatSkin*>(mSkin.get()))->SetHasStripes(hasStripes);
+	(dynamic_cast<CatSkin*>(mSkin))->SetHasStripes(hasStripes);
 	SetNumLimbs(4);
 }
 
@@ -30,11 +33,19 @@ void Cat::SetNumWhiskers(size_t numWhiskers)
 	mNumWhiskers = numWhiskers;
 }
 	
+// Set the skin color
+void Cat::SetSkinColor(const std::string& color)
+{
+	//mSkin = std::make_unique<CatSkin>(color);
+	mSkin = new CatSkin(color);
+}
+
 // Print information about the Cat
 std::string Cat::Info() const
 {
 	std::ostringstream os;
-	os << "The Cat named " << GetName()
+	os << "The Cat (" << mSkin->Info() << ")"
+		<< " named " << GetName()
 		<< " has " << GetNumLimbs() << " legs"
 		<< " and " << mNumWhiskers << " whiskers"
 		<< " and says \"" << Speak() << "\"";
@@ -42,8 +53,9 @@ std::string Cat::Info() const
 }
 
 // Default constructor
-Fish::Fish(const std::string& name) : Animal(name), mHasScales(true)
+Fish::Fish(const std::string& name, const std::string& color) : Animal(name), mHasScales(true)
 {
+	SetSkinColor(color);
 	SetNumLimbs(4);
 }
 
@@ -59,11 +71,19 @@ void Fish::SetHasScales(bool hasScales)
 	mHasScales = hasScales;
 }
 	
+// Set the skin color
+void Fish::SetSkinColor(const std::string& color)
+{
+	//mSkin = std::make_unique<FishSkin>(color);
+	mSkin = new FishSkin(color);
+}
+
 // Print information about the Fish
 std::string Fish::Info() const
 {
 	std::ostringstream os;
-	os << "The Fish named " << GetName()
+	os << "The Fish (" << mSkin->Info() << ")"
+		<< " named " << GetName()
 		<< " has " << GetNumLimbs() << " legs"
 		<< " and " << (mHasScales ? "scales" : "smooth skin")
 		<< " and says \"" << Speak() << "\"";
@@ -71,8 +91,9 @@ std::string Fish::Info() const
 }
 
 // Default constructor
-Octopus::Octopus(const std::string& name) : Fish(name)
+Octopus::Octopus(const std::string& name, const std::string& color) : Fish(name, color)
 {
+	SetSkinColor(color);
 	SetNumLimbs(8);
 	SetHasScales(false);
 }
@@ -87,7 +108,8 @@ std::string Octopus::Speak() const
 std::string Octopus::Info() const
 {
 	std::ostringstream os;
-	os << "The Octopus named " << GetName()
+	os << "The Octopus (" << mSkin->Info() << ")"
+		<< " named " << GetName()
 		<< " has " << GetNumLimbs() << " legs"
 		<< " and a big brain"
 		<< " and says \"" << Speak() << "\"";
